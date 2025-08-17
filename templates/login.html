@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;700&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href=" {{url_for('static', filename='css/appoint.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <section class="header">
+        <nav id="navbar">
+            <a href="index.html" class="logo"><i class="fa-solid fa-vial-virus"></i>  LabSphere</a><br><br><br>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul id="menu">
+                    <li><a href="{{url_for('home')}}">HOME</a></li>
+                 
+                    <a href="{{url_for('admin_login')}}" class="hero-btn"><i class="fa-solid fa-lock"></i> Admin</a>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>Login</h1>
+        </div>
+    </section>
+    <br><br>
+
+    <!-- Flash Message Section -->
+ 
+
+    <!-- Login Form Section -->
+    <div class="container">
+        <div class="form-container">
+            <h2>Login</h2>
+            <form method="POST" action="/login">
+                <label for="login-email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="login-password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{{url_for('register')}}">Register here</a>.</p>
+        </div>
+    </div>
+    <br><br>
+
+    <!-- Footer Section -->
+    <section class="footer">
+        <h4>Welcome to Docs</h4>
+        <p>The clinic ensures a warm and welcoming atmosphere, making it suitable for patients of all ages, including children <br> and the elderly.Offering in-house diagnostic facilities such as lab tests, X-rays, and scans for quick and accurate results.</p>
+        <div class="icons">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-solid fa-location-dot"></i>
+    
+        </div>
+    <p>Made With <i class="fa-regular fa-heart"></i> by Barerah Hashmi , Kinza Sheikh , Mashail Sheikh , Shurame Shariq</p>
+        
+    </section>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script>
+        // Get the `message` value passed from Flask
+        const message = "{{ message }}";
+    
+        if (message === "success") {
+            alert("Login successful!");
+        } else if (message === "failure") {
+            alert("Invalid username or password. Please try again.");
+        }
+    </script>
+    
+</body>
+</html>

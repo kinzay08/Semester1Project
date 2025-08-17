@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabSphere - Laboratory Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;700&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href=" {{url_for('static', filename='css/appoint.css')}}">
+    
+    <!-- Icon link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chatbox {
+            max-width: 700px;
+            width: 100%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            border: 2px rgb(190, 190, 244) solid;
+            overflow: hidden;
+        }
+
+        #chatlogs {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 15px;
+            padding-left: 15px;
+            scrollbar-width: thin;
+        }
+
+        .user-msg {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+
+        .bot-msg {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .bot-msg p,
+        .user-msg p {
+            padding: 10px;
+            border-radius: 20px;
+            max-width: 55%;
+            word-wrap: break-word;
+            text-align: center;
+        }
+
+        .bot-msg p {
+            background-color: #e4e7ea;
+            margin-right: auto;
+        }
+
+        .user-msg p {
+            background-color: rgb(85, 159, 183);
+            color: white;
+            margin-left: auto;
+        }
+
+        select,
+        button {
+            padding: 12px;
+            background-color: rgb(20, 82, 169);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        select:focus,
+        button:hover {
+            background-color: darkblue;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .loading {
+            font-size: 16px;
+            color: #999;
+        }
+
+        @media (max-width: 500px) {
+            #chatbox {
+                width: 90%;
+                padding: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <section class="header">
+        <nav id="navbar">
+            <a href="index.html" class="logo"><i class="fa-solid fa-vial-virus"></i>  LabSphere</a><br><br><br>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul id="menu">
+                    <li><a href="{{url_for('home2')}}">HOME</a></li>
+                    <li><a href="{{url_for('about')}}">ABOUT</a></li>
+                    <li><a href="{{url_for('test_details')}}">TEST DETAILS</a></li>
+                    <li><a href="{{url_for('dashboard')}}">APPOINTMENT</a></li>
+                    <li><a href="{{url_for('symptoms')}}">SYMPTOMS</a></li>
+                    <li><a href="{{url_for('quiz')}}">QUIZ</a></li>
+                    <li><a href="{{ url_for('chat') }}">CHATBOT</a></li>
+                <a href="{{url_for('home')}}" class="hero-btn">Logout</a>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()" ></i>
+        </nav>
+        <div class="text-box">
+            <h1>Laboratory Services ChatBox</h1>
+       
+        </div>   
+    </section><br><br>
+
+    <div id="chatbox">
+
+        <div id="chatlogs"></div>
+        <div id="input-area">
+            <button onclick="showMessageOptions()">Select an Option</button>
+            <select id="message-dropdown" class="hidden" onchange="sendMessage()">
+                <option value="">Select an option</option>
+                <option value="book_test">How to Book a Lab Test</option>
+                <option value="find_test">How to Find Test Details</option>
+                <option value="ask_expert">Ask a Lab Expert</option>
+                <option value="test_tips">Lab Test Preparation Tips</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="footer">
+        <h4>Welcome to LabSphere</h4>
+        <p>We offer in-house diagnostic services with quick and accurate results, including lab tests, X-rays, and scans. We ensure a comfortable environment for all patients.</p>
+        <div class="icons">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <p>Made with <i class="fa-regular fa-heart"></i> by LabSphere Team</p>
+    </section>
+
+    <script>
+        // Function to simulate bot's response
+        function botMessage(message) {
+            const chatlogs = document.getElementById("chatlogs");
+            const botMessage = document.createElement("div");
+            botMessage.classList.add("bot-msg");
+            const msg = document.createElement("p");
+            msg.textContent = message;
+            botMessage.appendChild(msg);
+            chatlogs.appendChild(botMessage);
+            chatlogs.scrollTop = chatlogs.scrollHeight; // Auto-scroll
+        }
+
+        // Show dropdown with message options
+        function showMessageOptions() {
+            const dropdown = document.getElementById("message-dropdown");
+            dropdown.classList.remove("hidden");
+        }
+
+        // Function to send selected message from the dropdown
+        function sendMessage() {
+            const dropdown = document.getElementById("message-dropdown");
+            const selectedValue = dropdown.value;
+            if (selectedValue) {
+                const chatlogs = document.getElementById("chatlogs");
+                const userMsg = document.createElement("div");
+                userMsg.classList.add("user-msg");
+                const userText = document.createElement("p");
+                userText.textContent = dropdown.options[dropdown.selectedIndex].text;
+                userMsg.appendChild(userText);
+                chatlogs.appendChild(userMsg);
+
+                // Respond based on the selected message
+                setTimeout(() => {
+                    switch (selectedValue) {
+                        case "book_test":
+                            botMessage("To book a lab test, please visit our 'Appointments' section. Select a test and confirm your details.");
+                            break;
+                        case "find_test":
+                            botMessage("You can find test details by visiting our 'Test Catalog' page. Choose the test you're interested in.");
+                            break;
+                        case "ask_expert":
+                            botMessage("You can consult a lab expert by booking an appointment through the 'Appointments' page.");
+                            break;
+                        case "test_tips":
+                            botMessage("Test Preparation Tips: 1. Fasting may be required for certain tests. 2. Bring your ID. 3. Avoid alcohol or certain medications.");
+                            break;
+                        default:
+                            botMessage("Sorry, I don't understand that.");
+                    }
+
+                    // Hide dropdown after selection
+                    dropdown.classList.add("hidden");
+                }, 1000);  // Adding a delay for simulating the bot response
+            } else {
+                botMessage("Please select a valid option.");
+            }
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+</body>
+</html>

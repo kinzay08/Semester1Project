@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #e2e2f5;
+    color: black;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 20px;     
+    background-color: rgb(204, 204, 225);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(../images/ai.jpg); */
+}
+
+h1 {
+    text-align: center;
+    color: black;
+}
+
+.dropdown-container {
+    margin-top: 30px;
+    padding: 20px;
+    width: 600px;
+     margin-left: 15px;
+    /* text-align: left; */
+    background-color: #dad8e1;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+     
+}
+
+label {
+    font-size: 18px;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #dad8e1;
+}
+
+.details-box {
+    margin-top: 30px;
+    padding: 20px;
+    width: 600px;
+    border: 1px solid #ddd;
+    background-color: #dad8e1;
+    margin-right: 30px;
+}
+
+.details-box h2 {
+    margin-bottom: 15px;
+    color: black;
+}
+
+.details-box p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: black;
+}

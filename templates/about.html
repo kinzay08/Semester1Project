@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;700&family=Satisfy&display=swap" rel="stylesheet">
+
+   
+<link rel="stylesheet" href=" {{url_for('static', filename='css/appoint.css')}}">
+
+
+    <!-- ///// icon link////// -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- ////// header section /////// -->
+    <section class="header">
+      
+        <nav id="navbar">
+            <a href="index.html" class="logo"><i class="fa-solid fa-vial-virus"></i>  LabSphere</a><br><br><br>
+         <div class="nav-links" id="navLinks">
+            
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+            <ul id="menu">
+                <li><a href="{{url_for('home2')}}">HOME</a></li>
+                <li><a href="{{url_for('about')}}">ABOUT</a></li>
+                <li><a href="{{url_for('test_details')}}">TEST DETAILS</a></li>
+                <li><a href="{{url_for('dashboard')}}">APPOINTMENT</a></li>
+                <li><a href="{{url_for('symptoms')}}">SYMPTOMS</a></li>
+                <li><a href="{{url_for('quiz')}}">QUIZ</a></li>
+                <li><a href="{{ url_for('chat') }}">CHATBOT</a></li>
+            <a href="{{url_for('home')}}" class="hero-btn">Logout</a>
+            </ul>
+         </div>
+         <i class="fa fa-bars" onclick="showMenu()" ></i>
+        </nav>
+     <!-- ////navbar//// -->
+     <div class="text-box">
+        <h1 style="color: white;">About Us</h1>
+       
+       
+     </div>   
+
+    </section><br><br>
+<!-- -------------about us content--------- -->
+<section class="about-us">
+    <div class="row">
+        <div class="about-col">
+            <h1 style="color: black;text-align: center;" >We are the World's <br> best Scientists</h1>
+            <p style="text-align: center;"> At Labspehre labortary, we are dedicated to providing exceptional healthcare services with a patient-first approach. Our labortary is built on the principles of compassion, integrity, and excellence, ensuring that every individual who walks through our doors receives the highest standard of care. Staffed by a team of highly qualified scientists, experienced specialists, and friendly support staff, we pride ourselves on offering personalized treatment plans tailored to the unique needs of each patient. Equipped with state-of-the-art facilities and advanced medical technology, we strive to deliver accurate diagnoses and effective treatments in a clean, safe, and welcoming environment.</p>
+            <a href="{{url_for('symptoms')}}" class="hero-btn red-btn" style="margin-left: 30%;">EXPLORE NOW</a>
+        </div>
+        <div class="about-col">
+            <img src="{{url_for('static', filename='images/pexels.jpg')}}" alt="">
+
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- -------------footer----------- -->
+<section class="footer">
+    <h4>Welcome to Labspehre</h4>
+    <p>The labortary ensures a warm and welcoming atmosphere, making it suitable for patients of all ages, including children <br> and the elderly.Offering in-house diagnostic facilities such as lab tests, X-rays, and scans for quick and accurate results.</p>
+    <div class="icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-solid fa-location-dot"></i>
+
+    </div>
+<p>Made With <i class="fa-regular fa-heart"></i> by Barerah Hashmi , Kinza Sheikh , Mashail Sheikh , Shurame Shariq</p>
+    
+</section>
+
+
+    <!-- ////javascript function/////// -->
+   
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>
